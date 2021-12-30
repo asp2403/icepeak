@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { SKIS } from '../mock-skis';
+import { SkiService } from '../ski.service';
+import { Ski } from '../Ski';
 
 @Component({
   selector: 'app-products',
@@ -30,7 +31,15 @@ export class ProductsComponent {
   //   })
   // );
 
-  skis = SKIS;
+  skis: Ski[] = [];
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private skiService: SkiService) { }
+
+  getSkis(): void {
+    this.skiService.getSkis().subscribe(skis => this.skis = skis);
+  }
+
+  ngOnInit(): void {
+    this.getSkis();
+  }
 }
