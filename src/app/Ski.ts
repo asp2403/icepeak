@@ -3,5 +3,6 @@ export interface Ski {
     model: string;
     vendor: string;
     price: number;
+    description?: string;
 
 }

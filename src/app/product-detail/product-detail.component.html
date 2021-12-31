@@ -1,1 +1,19 @@
-<p>product-detail works!</p>
+
+<div *ngIf="ski" class='wrapper'>
+    <div class="left">
+        <img src="/assets/data-images/{{ski.id}}.jpg">
+    </div>
+    <div class="right">
+        <h1>{{ski.vendor}}</h1>
+        <h2>{{ski.model}}</h2>
+        <p>{{ski.description}}</p>
+        <mat-divider></mat-divider>
+        <div class="footer">
+        <button mat-raised-button color="accent" class="footer-button">
+            <mat-icon>shopping_cart</mat-icon>
+            Добавить в корзину
+        </button>    
+        <button mat-raised-button (click)="goBack()" class="footer-button">Назад</button>
+        </div>
+    </div>
+</div>

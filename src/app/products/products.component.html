@@ -1,8 +1,8 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
+  <h1 class="mat-h1">Горные лыжи</h1>
   <mat-grid-list cols="3" rowHeight="400px">
     <mat-grid-tile *ngFor="let ski of skis" [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="dashboard-card" routerLink="/product/{{ski.id}}">
         <mat-card-title-group>
           <mat-card-title>
             {{ski.vendor}}
@@ -11,11 +11,11 @@
 
 
         </mat-card-title-group>
-        <mat-card-content class="dashboard-card-content">
+        <mat-card-content class="dashboard-card-content" >
           <div>
             <img src="/assets/data-images/{{ski.id}}-sm.jpg">
           </div>
-          <div>Price: {{ski.price | number}}</div>
+          <div>Цена: {{ski.price | number}} руб.</div>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

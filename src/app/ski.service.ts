@@ -13,4 +13,9 @@ export class SkiService {
   getSkis(): Observable<Ski[]> {
     return of(SKIS);
   }
+
+  getSki(id: number): Observable<Ski> {
+    const ski = SKIS.find(ski => ski.id === id)!;
+    return of(ski);
+  }
 }
