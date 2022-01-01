@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { SkiService } from '../ski.service';
 import { Ski } from '../Ski';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,7 +17,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private skiService: SkiService,
-    private location: Location
+    private location: Location,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +32,16 @@ export class ProductDetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  addToCart(id: number): void {
+    this.skiService.addToCart(id).subscribe(ski => {
+      this.snackBar.open(`Лыжи ${ski.model} добавлены в корзину`, '', {
+        duration: 2000,
+        verticalPosition: 'top'
+      });
+      
+      this.goBack()});
   }
 
 }

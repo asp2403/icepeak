@@ -21,6 +21,9 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>{{title}}</span>
+      <button mat-flat-button color="accent" routerLink="/shopping-cart">
+        <mat-icon>shopping_cart</mat-icon>{{getCartLength()}}
+      </button>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

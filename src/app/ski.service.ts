@@ -3,10 +3,13 @@ import { Ski } from './Ski';
 import { SKIS } from './mock-skis';
 import { Observable, of } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class SkiService {
+
+  cart: Ski[] = [];
 
   constructor() { }
 
@@ -17,5 +20,11 @@ export class SkiService {
   getSki(id: number): Observable<Ski> {
     const ski = SKIS.find(ski => ski.id === id)!;
     return of(ski);
+  }
+
+  addToCart(id: number): Observable<Ski> {
+    const ski = this.getSki(id);
+    ski.subscribe(ski => this.cart.push(ski));
+    return ski;
   }
 }

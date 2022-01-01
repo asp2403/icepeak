@@ -16,13 +16,16 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     ProductsComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     MatListModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
