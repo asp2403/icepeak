@@ -9,8 +9,6 @@ import { Observable, of } from 'rxjs';
 })
 export class SkiService {
 
-  cart: Ski[] = [];
-
   constructor() { }
 
   getSkis(): Observable<Ski[]> {
@@ -22,9 +20,4 @@ export class SkiService {
     return of(ski);
   }
 
-  addToCart(id: number): Observable<Ski> {
-    const ski = this.getSki(id);
-    ski.subscribe(ski => this.cart.push(ski));
-    return ski;
-  }
 }
