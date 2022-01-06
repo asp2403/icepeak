@@ -2,6 +2,21 @@ table {
     width: 100%;
 }
 
-.wrapper {
-    padding: 1rem;
+tr.mat-footer-row {
+    font-weight: bold;
 }
+
+.button-panel {
+    display: flex;
+    gap: .7rem;
+    margin-top: 1rem;
+}
+
+img {
+    margin: 1rem;
+}
+
+
+
+
+

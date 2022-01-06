@@ -53,6 +53,10 @@ export class CartService {
     this.cart.splice(index, 1);
   }
 
+  clearCart(): void {
+    this.cart = [];
+  }
+
   getDataSource(): DSCartItem[] {
     let ds: DSCartItem[] = [];
     for (let cartItem of this.cart) {

@@ -1,7 +1,6 @@
 .wrapper {
     display: flex;
     justify-content: flex-start;
-    padding: 1rem;
 }
 
 .left {
@@ -14,8 +13,8 @@
 }
 
 .footer {
-    margin: 10px;
+    margin-top: 1rem;
     display: flex;
     justify-content: flex-start;
-    gap: 5px;
+    gap: .7rem;
 }
