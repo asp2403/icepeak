@@ -6,6 +6,14 @@ import { PRODUCT_TYPE_SKI } from './Ski';
 
 export const PRODUCT_TYPE_ERROR = -1;
 
+export class DSCartItem {
+  id?: number;
+  vendor?: string;
+  model?: string;
+  price?: number;
+  quantity?: number
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +46,26 @@ export class CartService {
     } else {
       return '';
     }
+  }
+
+
+  delCartItem(index: number) {
+    this.cart.splice(index, 1);
+  }
+
+  getDataSource(): DSCartItem[] {
+    let ds: DSCartItem[] = [];
+    for (let cartItem of this.cart) {
+      if (cartItem.product) {
+        let dsItem: DSCartItem = new DSCartItem();
+        dsItem.id = cartItem.product.id;
+        dsItem.vendor = cartItem.product.vendor;
+        dsItem.model = cartItem.product.model;
+        dsItem.price = cartItem.product.price;
+        dsItem.quantity = cartItem.quantity;
+        ds.push(dsItem);
+      }
+    }
+    return ds;
   }
 }

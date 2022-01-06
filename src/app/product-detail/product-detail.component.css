@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     justify-content: flex-start;
-    padding: 20px;
+    padding: 1rem;
 }
 
 .left {

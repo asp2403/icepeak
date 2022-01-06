@@ -1,1 +1,12 @@
-<p>shopping-cart works!</p>
+<div class="wrapper">
+    <h1>Ваша корзина</h1>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <mat-text-column name="id" headerText="Артикул"></mat-text-column>
+        <mat-text-column name="vendor" headerText="Производитель"></mat-text-column>
+        <mat-text-column name="model" headerText="Модель"></mat-text-column>
+        <mat-text-column name="price" headerText="Цена"></mat-text-column>
+        <mat-text-column name="quantity" headerText="Количество"></mat-text-column>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

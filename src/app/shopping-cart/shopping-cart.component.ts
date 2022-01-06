@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../cart.service';
+import { CartService, DSCartItem } from '../cart.service';
+import { CartItem} from '../cart';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -8,9 +9,14 @@ import { CartService } from '../cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
+  displayedColumns: string [] = ['id', 'vendor', 'model', 'price', 'quantity'];
+  dataSource: DSCartItem [] = [];
+
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
+    this.dataSource = this.cartService.getDataSource();
+    
   }
 
 }

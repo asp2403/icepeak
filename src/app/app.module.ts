@@ -18,6 +18,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table'; 
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
