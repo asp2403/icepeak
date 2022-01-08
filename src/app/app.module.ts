@@ -19,7 +19,14 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
-import { QuantitySpinnerComponent } from './quantity-spinner/quantity-spinner.component'; 
+import { QuantitySpinnerComponent } from './quantity-spinner/quantity-spinner.component';
+import { OrderFormComponent } from './order-form/order-form.component'; 
+import {MatStepperModule} from '@angular/material/stepper'; 
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio'; 
+
 
 @NgModule({
   declarations: [
@@ -28,7 +35,8 @@ import { QuantitySpinnerComponent } from './quantity-spinner/quantity-spinner.co
     ProductsComponent,
     ProductDetailComponent,
     ShoppingCartComponent,
-    QuantitySpinnerComponent
+    QuantitySpinnerComponent,
+    OrderFormComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +52,13 @@ import { QuantitySpinnerComponent } from './quantity-spinner/quantity-spinner.co
     MatCardModule,
     MatMenuModule,
     MatSnackBarModule,
-    MatTableModule
+    MatTableModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatRadioModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

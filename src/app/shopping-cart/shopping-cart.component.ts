@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CartService, DSCartItem } from '../cart.service';
-import { CartItem} from '../cart';
+import { CartItem } from '../cart';
 import { Location } from '@angular/common';
 import { MatTable } from '@angular/material/table';
 import { OnQuantityChangeEvent } from '../quantity-spinner/quantity-spinner.component';
@@ -12,15 +12,15 @@ import { OnQuantityChangeEvent } from '../quantity-spinner/quantity-spinner.comp
 })
 export class ShoppingCartComponent implements OnInit {
 
-  displayedColumns: string [] = ['id', 'vendor', 'model', 'price', 'quantity'];
-  footerColumns: string [] = ['id', 'quantity'];
-  dataSource: DSCartItem [] = [];
+  displayedColumns: string[] = ['id', 'vendor', 'model', 'price', 'quantity', 'action'];
+  footerColumns: string[] = ['id', 'quantity'];
+  dataSource: DSCartItem[] = [];
 
   @ViewChild(MatTable) table!: MatTable<DSCartItem>;
 
   constructor(private cartService: CartService, private location: Location) { }
 
-  updateDatasource(): void {
+  private updateDatasource(): void {
     this.dataSource = this.cartService.getDataSource();
   }
 
@@ -29,11 +29,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getTotalCost(): number {
-    let sum = 0;
-    for (let el of this.dataSource) {
-      sum += (el.price ?? 0) * (el.quantity ?? 0);
-    }
-    return sum;
+    return this.cartService.getTotalCost();
   }
 
   goBack(): void {
@@ -43,19 +39,33 @@ export class ShoppingCartComponent implements OnInit {
   clearCart(): void {
     if (confirm('Вы действительно хотите очистить корзину?')) {
       this.cartService.clearCart();
-      this.updateDatasource();
-      this.table.renderRows();
+      this.updateGrid();
     }
   }
 
   onQuantityChange(value: OnQuantityChangeEvent) {
     this.cartService.updateQuantity(value.index, value.quantity);
+    this.updateGrid();
+  }
+
+  private updateGrid(): void {
     this.updateDatasource();
     this.table.renderRows();
   }
 
+  delItem(index: number): void {
+    if (confirm('Удалить товар из корзины?')) {
+      this.cartService.delCartItem(index);
+      this.updateGrid();
+    }
+  }
+
+  cartIsEmpty(): boolean {
+    return this.cartService.isEmpty();
+  }
 
 
-  
+
+
 
 }

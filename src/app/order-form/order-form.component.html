@@ -1,0 +1,58 @@
+<div class="wrapper">
+    <h1>Оформление заказа</h1>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        
+        <ng-container matColumnDef="vendor">
+            <th mat-header-cell *matHeaderCellDef> Производитель </th>
+            <td mat-cell *matCellDef="let element"> {{element.vendor}} </td>
+            <td mat-footer-cell *matFooterCellDef> Итого: </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="model">
+            <th mat-header-cell *matHeaderCellDef> Модель </th>
+            <td mat-cell *matCellDef="let element">
+                {{element.model}}
+
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Цена </th>
+            <td mat-cell *matCellDef="let element"> {{element.price | number}} руб. </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Количество </th>
+            <td mat-cell *matCellDef="let element" >
+                {{element.quantity}}
+            </td>
+            <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | number}} руб. </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="footerColumns"></tr>
+    </table>
+    <div class="button-panel">
+        <button mat-raised-button (click)="goBack()">Назад</button>
+    </div>
+    <mat-stepper linear>
+        <mat-step [stepControl]="orderTypeFormGroup" >
+            <form [formGroup]="orderTypeFormGroup">
+              <ng-template matStepLabel>Выберите способ получения товара</ng-template>
+              
+                <mat-label>Способ получения</mat-label>
+                <mat-radio-group>
+                    <mat-radio-button value="1" required="required">Самовывоз из магазина</mat-radio-button>
+                    <mat-radio-button value="2">Доставка курьером</mat-radio-button>
+                </mat-radio-group>
+                  
+              
+              <div>
+                <button mat-button matStepperNext>Дальше</button>
+              </div>
+            </form>
+          </mat-step>
+    </mat-stepper>
+</div>

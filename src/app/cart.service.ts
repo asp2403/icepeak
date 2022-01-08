@@ -76,4 +76,19 @@ export class CartService {
   updateQuantity(index: number, quantity: number) {
     this.cart[index].quantity = quantity;
   }
+
+  isEmpty(): boolean {
+    return this.cart.length === 0;
+  }
+
+  getTotalCost(): number {
+    let sum = 0;
+    for (let el of this.cart) {
+      if (el.product) {
+        sum += (el.product.price ?? 0) * (el.quantity ?? 0);
+      }
+    }
+    return sum;
+  }
+
 }
