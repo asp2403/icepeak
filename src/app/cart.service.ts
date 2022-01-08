@@ -72,4 +72,8 @@ export class CartService {
     }
     return ds;
   }
+
+  updateQuantity(index: number, quantity: number) {
+    this.cart[index].quantity = quantity;
+  }
 }

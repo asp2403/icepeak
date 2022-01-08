@@ -3,6 +3,7 @@ import { CartService, DSCartItem } from '../cart.service';
 import { CartItem} from '../cart';
 import { Location } from '@angular/common';
 import { MatTable } from '@angular/material/table';
+import { OnQuantityChangeEvent } from '../quantity-spinner/quantity-spinner.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -19,13 +20,20 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(private cartService: CartService, private location: Location) { }
 
-  ngOnInit(): void {
+  updateDatasource(): void {
     this.dataSource = this.cartService.getDataSource();
-    
   }
 
-  getTotalCost(): number | undefined {
-    return this.dataSource.map((el) => el.price).reduce((sum, cur) => (sum ?? 0) + (cur ?? 0), 0);
+  ngOnInit(): void {
+    this.updateDatasource();
+  }
+
+  getTotalCost(): number {
+    let sum = 0;
+    for (let el of this.dataSource) {
+      sum += (el.price ?? 0) * (el.quantity ?? 0);
+    }
+    return sum;
   }
 
   goBack(): void {
@@ -35,9 +43,19 @@ export class ShoppingCartComponent implements OnInit {
   clearCart(): void {
     if (confirm('Вы действительно хотите очистить корзину?')) {
       this.cartService.clearCart();
-      this.dataSource = this.cartService.getDataSource();
+      this.updateDatasource();
       this.table.renderRows();
     }
   }
+
+  onQuantityChange(value: OnQuantityChangeEvent) {
+    this.cartService.updateQuantity(value.index, value.quantity);
+    this.updateDatasource();
+    this.table.renderRows();
+  }
+
+
+
+  
 
 }

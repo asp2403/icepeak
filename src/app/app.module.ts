@@ -18,7 +18,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatTableModule} from '@angular/material/table'; 
+import {MatTableModule} from '@angular/material/table';
+import { QuantitySpinnerComponent } from './quantity-spinner/quantity-spinner.component'; 
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MatTableModule} from '@angular/material/table';
     NavComponent,
     ProductsComponent,
     ProductDetailComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    QuantitySpinnerComponent
   ],
   imports: [
     BrowserModule,
