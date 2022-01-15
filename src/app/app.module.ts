@@ -26,6 +26,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio'; 
+import {MatSelectModule} from '@angular/material/select'; 
+
 
 
 @NgModule({
@@ -57,7 +59,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSelectModule
 
   ],
   providers: [],

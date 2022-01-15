@@ -60,7 +60,13 @@
                 <ng-template matStepLabel>Выберите параметры доставки</ng-template>
                 <div [ngSwitch]="orderTypeFormGroup.value.orderType">
                     <div *ngSwitchCase="1">
-                        <p>Выберите магазин</p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Выберите магазин</mat-label>
+                            <mat-select formControlName="shop">
+                              <mat-option *ngFor="let shop of shopList; let i = index" value={{i}}>{{shop.title}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
                     </div>
                     <div *ngSwitchCase="2">
                         <p>Задайте адрес</p>
@@ -72,6 +78,7 @@
                 </div>
                 
             </form>
+            <p>{{deliveryFormGroup.value | json}}</p>
         </mat-step>
         <mat-step [stepControl]="paymentFormGroup">
             <form [formGroup]="paymentFormGroup">
