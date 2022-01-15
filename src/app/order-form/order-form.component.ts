@@ -15,14 +15,23 @@ export class OrderFormComponent implements OnInit {
   footerColumns: string[] = ['vendor', 'quantity'];
   dataSource: DSCartItem[] = [];
   orderTypeFormGroup!: FormGroup;
+  deliveryFormGroup!: FormGroup;
+  paymentFormGroup!: FormGroup;
+  orderTypeList = [
+    {id: 1, name: 'orderType', value: 'Самовывоз из магазина'},
+    {id: 2, name: 'orderType', value: 'Доставка курьером'}
+  ];
+
 
   constructor(private cartService: CartService, private location: Location, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.dataSource = this.cartService.getDataSource();
     this.orderTypeFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required],
+      orderType: [1, Validators.required],
     });
+    this.deliveryFormGroup = this.formBuilder.group({});
+    this.paymentFormGroup = this.formBuilder.group({});
   }
 
   getTotalCost() {
