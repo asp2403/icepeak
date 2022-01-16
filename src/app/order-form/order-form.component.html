@@ -60,25 +60,33 @@
                 <ng-template matStepLabel>Выберите параметры доставки</ng-template>
                 <div [ngSwitch]="orderTypeFormGroup.value.orderType">
                     <div *ngSwitchCase="1">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field>
                             <mat-label>Выберите магазин</mat-label>
                             <mat-select formControlName="shop">
-                              <mat-option *ngFor="let shop of shopList; let i = index" value={{i}}>{{shop.title}}</mat-option>
+                                <mat-option *ngFor="let shop of shopList; let i = index" value={{i}}>{{shop.title}}
+                                </mat-option>
                             </mat-select>
-                          </mat-form-field>
-
+                            <mat-error *ngIf="deliveryFormGroup.controls['shop'].invalid">Поле является обязательным
+                            </mat-error>
+                        </mat-form-field>
                     </div>
                     <div *ngSwitchCase="2">
-                        <p>Задайте адрес</p>
+                        <mat-form-field>
+                            <mat-label>Адрес доставки</mat-label>
+                            <textarea matInput formControlName="deliveryAddress" ></textarea>
+                            <mat-error *ngIf="deliveryFormGroup.controls['deliveryAddress'].invalid">Поле является
+                                обязательным</mat-error>
+                        </mat-form-field>
                     </div>
                     <div>
                         <button mat-button matStepperPrevious>Назад</button>
                         <button mat-button matStepperNext>Дальше</button>
                     </div>
                 </div>
-                
+
             </form>
-            <p>{{deliveryFormGroup.value | json}}</p>
+            
+                        
         </mat-step>
         <mat-step [stepControl]="paymentFormGroup">
             <form [formGroup]="paymentFormGroup">

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
 import { DSCartItem } from '../cart.service';
 import { Location } from '@angular/common';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ShopService } from '../shop-service.service';
 import { Shop } from '../shop';
 
@@ -20,10 +20,31 @@ export class OrderFormComponent implements OnInit {
   deliveryFormGroup!: FormGroup;
   paymentFormGroup!: FormGroup;
   orderTypeList = [
-    {id: 1, name: 'orderType', value: 'Самовывоз из магазина'},
-    {id: 2, name: 'orderType', value: 'Доставка курьером'}
+    { id: 1, value: 'Самовывоз из магазина' },
+    { id: 2, value: 'Доставка курьером' }
   ];
   shopList: Shop[] = [];
+  
+  deliveryValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const shop = this.deliveryFormGroup?.controls['shop'];
+    const deliveryAddress = this.deliveryFormGroup?.controls['deliveryAddress'];
+    const orderType = this.orderTypeFormGroup.controls['orderType'].value;
+    shop?.setErrors(null);
+    deliveryAddress?.setErrors(null);
+    switch (orderType) {
+      case 1:
+        if (!shop?.value) {
+          return { requiredShop: true };
+        }
+        break;
+      case 2:
+        if (!deliveryAddress?.value) {
+          return {requiredAddress: true};
+        }
+        break;
+    }
+    return null;
+  }
 
 
   constructor(private cartService: CartService, private location: Location, private formBuilder: FormBuilder, private shopService: ShopService) { }
@@ -34,9 +55,10 @@ export class OrderFormComponent implements OnInit {
       orderType: [1, Validators.required],
     });
     this.deliveryFormGroup = this.formBuilder.group({
-      shop: ['', Validators.required]
+      shop: ['', this.deliveryValidator],
+      deliveryAddress: ['', this.deliveryValidator],
 
-    });
+    } );
     this.paymentFormGroup = this.formBuilder.group({});
     this.shopService.getShopList().subscribe(shopList => this.shopList = shopList);
   }

@@ -22,3 +22,7 @@ mat-radio-group {
     gap: .5rem;
     margin: .5rem;
 }
+
+.deliveryAddress {
+    width: auto;
+}
