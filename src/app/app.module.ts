@@ -28,6 +28,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio'; 
 import {MatSelectModule} from '@angular/material/select'; 
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { OrderCompleteComponent } from './order-complete/order-complete.component';
 
 
 
@@ -39,7 +40,8 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
     ProductDetailComponent,
     ShoppingCartComponent,
     QuantitySpinnerComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    OrderCompleteComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
     MatSelectModule
 
   ],
-  providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always', appearance: 'outline'}}],
+  providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always', appearance: 'fill'}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

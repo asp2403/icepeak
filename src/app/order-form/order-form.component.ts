@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ShopService } from '../shop-service.service';
 import { Shop } from '../shop';
+import { Order } from '../order';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-form',
@@ -18,7 +20,7 @@ export class OrderFormComponent implements OnInit {
   dataSource: DSCartItem[] = [];
   orderTypeFormGroup!: FormGroup;
   deliveryFormGroup!: FormGroup;
-  paymentFormGroup!: FormGroup;
+  contactDataFormGroup!: FormGroup;
   orderTypeList = [
     { id: 1, value: 'Самовывоз из магазина' },
     { id: 2, value: 'Доставка курьером' }
@@ -47,7 +49,8 @@ export class OrderFormComponent implements OnInit {
   }
 
 
-  constructor(private cartService: CartService, private location: Location, private formBuilder: FormBuilder, private shopService: ShopService) { }
+  constructor(private cartService: CartService, private location: Location, private formBuilder: FormBuilder, 
+    private shopService: ShopService, private router: Router) { }
 
   ngOnInit(): void {
     this.dataSource = this.cartService.getDataSource();
@@ -59,16 +62,42 @@ export class OrderFormComponent implements OnInit {
       deliveryAddress: ['', this.deliveryValidator],
 
     } );
-    this.paymentFormGroup = this.formBuilder.group({});
+    this.contactDataFormGroup = this.formBuilder.group({
+      name: ['', Validators.required],
+      patronymic: [],
+      surname: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('\\d{3}\\s?\\d{3}\\s?\\d{2}\\s?\\d{2}')]],
+      email: ['', [Validators.required, Validators.email]]
+    });
     this.shopService.getShopList().subscribe(shopList => this.shopList = shopList);
   }
 
-  getTotalCost() {
+  getTotalCost(): number {
     return this.cartService.getTotalCost();
   }
 
-  goBack() {
+  goBack(): void {
     this.location.back();
+  }
+
+  onSubmit(): void {
+    let order: Order = {
+      orderType: this.orderTypeFormGroup.controls['orderType'].value,
+      shop: this.deliveryFormGroup.controls['shop'].value,
+      deliveryAddress: this.deliveryFormGroup.controls['deliveryAddress'].value,
+      contactData: {
+        name: this.contactDataFormGroup.controls['name'].value,
+        patronymic: this.contactDataFormGroup.controls['patronymic'].value,
+        surname: this.contactDataFormGroup.controls['surname'].value,
+        phone: this.contactDataFormGroup.controls['phone'].value,
+        email: this.contactDataFormGroup.controls['email'].value
+      }
+
+    }
+    sessionStorage.setItem('order', JSON.stringify(order));
+    console.log (JSON.stringify(order));
+    this.router.navigate(['order-complete']);
+
   }
 
 }

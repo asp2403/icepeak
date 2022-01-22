@@ -40,17 +40,19 @@
     <mat-stepper linear #stepper>
         <mat-step [stepControl]="orderTypeFormGroup">
             <form [formGroup]="orderTypeFormGroup">
-                <ng-template matStepLabel>Выберите способ получения товара</ng-template>
-                <mat-label>Способ получения</mat-label>
-                <mat-radio-group formControlName="orderType">
-                    <mat-radio-button *ngFor="let orderType of orderTypeList" [value]="orderType.id">{{orderType.value}}
-                    </mat-radio-button>
-
-                </mat-radio-group>
                 <div>
-                    <button mat-button matStepperNext>Дальше</button>
-                </div>
+                    <ng-template matStepLabel>Выберите способ получения товара</ng-template>
+                    <mat-label>Способ получения</mat-label>
+                    <mat-radio-group formControlName="orderType">
+                        <mat-radio-button *ngFor="let orderType of orderTypeList" [value]="orderType.id">
+                            {{orderType.value}}
+                        </mat-radio-button>
 
+                    </mat-radio-group>
+                    <div>
+                        <button mat-button matStepperNext>Дальше</button>
+                    </div>
+                </div>
             </form>
 
         </mat-step>
@@ -60,23 +62,27 @@
                 <ng-template matStepLabel>Выберите параметры доставки</ng-template>
                 <div [ngSwitch]="orderTypeFormGroup.value.orderType">
                     <div *ngSwitchCase="1">
-                        <mat-form-field>
-                            <mat-label>Выберите магазин</mat-label>
-                            <mat-select formControlName="shop">
-                                <mat-option *ngFor="let shop of shopList; let i = index" value={{i}}>{{shop.title}}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="deliveryFormGroup.controls['shop'].invalid">Поле является обязательным
-                            </mat-error>
-                        </mat-form-field>
+                        <div class="flexable">
+                            <mat-form-field>
+                                <mat-label>Выберите магазин</mat-label>
+                                <mat-select formControlName="shop">
+                                    <mat-option *ngFor="let shop of shopList; let i = index" value={{i}}>{{shop.title}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="deliveryFormGroup.controls['shop'].invalid">Поле является обязательным
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
                     </div>
                     <div *ngSwitchCase="2">
-                        <mat-form-field>
-                            <mat-label>Адрес доставки</mat-label>
-                            <textarea matInput formControlName="deliveryAddress" ></textarea>
-                            <mat-error *ngIf="deliveryFormGroup.controls['deliveryAddress'].invalid">Поле является
-                                обязательным</mat-error>
-                        </mat-form-field>
+                        <div class="flexable">
+                            <mat-form-field>
+                                <mat-label>Адрес доставки</mat-label>
+                                <textarea matInput formControlName="deliveryAddress"></textarea>
+                                <mat-error *ngIf="deliveryFormGroup.controls['deliveryAddress'].invalid">Поле является
+                                    обязательным</mat-error>
+                            </mat-form-field>
+                        </div>
                     </div>
                     <div>
                         <button mat-button matStepperPrevious>Назад</button>
@@ -85,17 +91,69 @@
                 </div>
 
             </form>
-            
-                        
-        </mat-step>
-        <mat-step [stepControl]="paymentFormGroup">
-            <form [formGroup]="paymentFormGroup">
-                <ng-template matStepLabel>Выберите способ оплаты</ng-template>
-                Способ оплаты
-                <div>
-                    <button mat-button matStepperPrevious>Назад</button>
 
+
+        </mat-step>
+        <mat-step [stepControl]="contactDataFormGroup">
+            <form [formGroup]="contactDataFormGroup" (ngSubmit)="onSubmit()">
+                <ng-template matStepLabel>Контактные данные</ng-template>
+                Контактные данные
+                <div class="content">
+                    <div class="row">
+                        <mat-form-field>
+                            <mat-label>Фамилия</mat-label>
+                            <input matInput formControlName="surname">
+                            <mat-error *ngIf="contactDataFormGroup.controls['surname'].invalid">Поле является
+                                обязательным</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Имя</mat-label>
+                            <input matInput formControlName="name">
+                            <mat-error *ngIf="contactDataFormGroup.controls['name'].invalid">Поле является
+                                обязательным</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Отчество</mat-label>
+                            <input matInput formControlName="patronymic">
+
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field>
+                            <mat-label>Телефон</mat-label>
+                            <input matInput formControlName="phone" placeholder="916 123 45 67">
+                            <span matPrefix>+7&nbsp;</span>
+                            <mat-error *ngIf="contactDataFormGroup.controls['phone'].errors?.['required']">
+                                Поле является обязательным
+                            </mat-error>
+                            <mat-error *ngIf="contactDataFormGroup.controls['phone'].errors?.['pattern']">
+                                Неправильный формат номера
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" placeholder="vasyapupkin@mail.ru">
+                            <mat-error *ngIf="contactDataFormGroup.controls['email'].errors?.['required']">Поле является
+                                обязательным
+                            </mat-error>
+                            <mat-error *ngIf="contactDataFormGroup.controls['email'].errors?.['email']">Неправильный
+                                формат адреса
+                            </mat-error>
+                        </mat-form-field>
+
+                    </div>
+                    <div class="check-row">
+                        <button mat-raised-button type="submit" [disabled]="!contactDataFormGroup.valid" color="accent">
+                            <mat-icon>check</mat-icon>Оформить заказ
+                        </button>
+                    </div>
+
+                    <div>
+                        <button mat-button matStepperPrevious>Назад</button>
+
+                    </div>
                 </div>
+
             </form>
         </mat-step>
     </mat-stepper>

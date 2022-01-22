@@ -26,3 +26,25 @@ mat-radio-group {
 .deliveryAddress {
     width: auto;
 }
+
+.content {
+    margin: .5rem;
+}
+
+.check-row {
+    display: flex;
+    gap: .5rem;
+    margin: .5rem;
+    justify-content: center;
+}
+
+mat-form-field {
+    flex: 1;
+}
+
+.flexable {
+    display: flex;
+}
+
+
+
