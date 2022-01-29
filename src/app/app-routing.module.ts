@@ -5,6 +5,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { OrderFormComponent } from './order-form/order-form.component';
 import { OrderCompleteComponent } from './order-complete/order-complete.component';
+import { FinalComponent } from './final/final.component';
 
 const routes: Routes = [
   { path: 'products', component: ProductsComponent },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductDetailComponent},
   { path: 'shopping-cart', component: ShoppingCartComponent },
   { path: 'order', component: OrderFormComponent},
-  { path: 'order-complete', component: OrderCompleteComponent }
+  { path: 'order-complete', component: OrderCompleteComponent },
+  { path: 'final', component: FinalComponent }
 
 ];
 

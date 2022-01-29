@@ -29,6 +29,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select'; 
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { OrderCompleteComponent } from './order-complete/order-complete.component';
+import { FinalComponent } from './final/final.component';
 
 
 
@@ -41,7 +42,8 @@ import { OrderCompleteComponent } from './order-complete/order-complete.componen
     ShoppingCartComponent,
     QuantitySpinnerComponent,
     OrderFormComponent,
-    OrderCompleteComponent
+    OrderCompleteComponent,
+    FinalComponent
   ],
   imports: [
     BrowserModule,
