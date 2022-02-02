@@ -4,7 +4,7 @@ import { CartItem } from '../cart';
 import { Location } from '@angular/common';
 import { MatTable } from '@angular/material/table';
 import { OnQuantityChangeEvent } from '../quantity-spinner/quantity-spinner.component';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
@@ -39,7 +39,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   clearCart(): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { msg: 'Вы действительно хотите очистить корзину?' }});
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { msg: 'Вы действительно хотите очистить корзину?' } });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.cartService.clearCart();
@@ -59,7 +59,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   delItem(index: number): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { msg: 'Удалить товар из корзины?' }});
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { msg: 'Удалить товар из корзины?' } });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.cartService.delCartItem(index);
