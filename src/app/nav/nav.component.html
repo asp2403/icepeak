@@ -1,10 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Меню</mat-toolbar>
+    <mat-toolbar>Категория</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/products">Горные лыжи</a>
-
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
