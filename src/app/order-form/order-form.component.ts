@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../cart.service';
-import { DSCartItem } from '../cart.service';
 import { Location } from '@angular/common';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ShopService } from '../shop-service.service';
@@ -15,9 +13,6 @@ import { Router } from '@angular/router';
 })
 export class OrderFormComponent implements OnInit {
 
-  displayedColumns: string[] = ['vendor', 'model', 'price', 'quantity'];
-  footerColumns: string[] = ['vendor', 'quantity'];
-  dataSource: DSCartItem[] = [];
   orderTypeFormGroup!: FormGroup;
   deliveryFormGroup!: FormGroup;
   contactDataFormGroup!: FormGroup;
@@ -49,11 +44,10 @@ export class OrderFormComponent implements OnInit {
   }
 
 
-  constructor(private cartService: CartService, private location: Location, private formBuilder: FormBuilder, 
+  constructor(private location: Location, private formBuilder: FormBuilder, 
     private shopService: ShopService, private router: Router) { }
 
   ngOnInit(): void {
-    this.dataSource = this.cartService.getDataSource();
     this.orderTypeFormGroup = this.formBuilder.group({
       orderType: [1, Validators.required],
     });
@@ -70,10 +64,6 @@ export class OrderFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]]
     });
     this.shopService.getShopList().subscribe(shopList => this.shopList = shopList);
-  }
-
-  getTotalCost(): number {
-    return this.cartService.getTotalCost();
   }
 
   goBack(): void {

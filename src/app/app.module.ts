@@ -30,6 +30,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { OrderCompleteComponent } from './order-complete/order-complete.component';
 import { FinalComponent } from './final/final.component';
+import { CheckGridComponent } from './check-grid/check-grid.component';
 
 
 
@@ -43,7 +44,8 @@ import { FinalComponent } from './final/final.component';
     QuantitySpinnerComponent,
     OrderFormComponent,
     OrderCompleteComponent,
-    FinalComponent
+    FinalComponent,
+    CheckGridComponent
   ],
   imports: [
     BrowserModule,

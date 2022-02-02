@@ -3,7 +3,6 @@ import { Order } from '../order';
 import { ShopService } from '../shop-service.service';
 import { Shop } from '../shop';
 import { CartService } from '../cart.service';
-import { DSCartItem } from '../cart.service';
 import { Location } from '@angular/common';
 import { OrderService } from '../order.service';
 import { Router } from '@angular/router';
@@ -26,15 +25,13 @@ export class OrderCompleteComponent implements OnInit {
   text: NameValue[] = [];
   shopList: Shop[] = [];
 
-  displayedColumns: string[] = ['vendor', 'model', 'price', 'quantity'];
-  footerColumns: string[] = ['vendor', 'quantity'];
-  dataSource: DSCartItem[] = [];
+  
 
   constructor(private shopService: ShopService, private cartService: CartService, private location: Location,
     private orderService: OrderService, private router: Router) { }
 
   private init(): void {
-    this.dataSource = this.cartService.getDataSource();
+    
     let orderJson = sessionStorage.getItem('order');
     if (orderJson) {
       this.order = JSON.parse(orderJson);
@@ -68,10 +65,7 @@ export class OrderCompleteComponent implements OnInit {
 
   }
 
-  getTotalCost(): number {
-    return this.cartService.getTotalCost();
-  }
-
+  
   goBack(): void {
     this.location.back();
   }
