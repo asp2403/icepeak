@@ -31,6 +31,9 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { OrderCompleteComponent } from './order-complete/order-complete.component';
 import { FinalComponent } from './final/final.component';
 import { CheckGridComponent } from './check-grid/check-grid.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 
 
@@ -45,7 +48,8 @@ import { CheckGridComponent } from './check-grid/check-grid.component';
     OrderFormComponent,
     OrderCompleteComponent,
     FinalComponent,
-    CheckGridComponent
+    CheckGridComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +71,9 @@ import { CheckGridComponent } from './check-grid/check-grid.component';
     ReactiveFormsModule,
     MatInputModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    MatTabsModule
 
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always', appearance: 'fill'}}],

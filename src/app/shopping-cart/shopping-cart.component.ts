@@ -4,6 +4,8 @@ import { CartItem } from '../cart';
 import { Location } from '@angular/common';
 import { MatTable } from '@angular/material/table';
 import { OnQuantityChangeEvent } from '../quantity-spinner/quantity-spinner.component';
+import {MatDialog} from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -18,7 +20,7 @@ export class ShoppingCartComponent implements OnInit {
 
   @ViewChild(MatTable) table!: MatTable<DSCartItem>;
 
-  constructor(private cartService: CartService, private location: Location) { }
+  constructor(private cartService: CartService, private location: Location, public dialog: MatDialog) { }
 
   private updateDatasource(): void {
     this.dataSource = this.cartService.getDataSource();
@@ -37,10 +39,13 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   clearCart(): void {
-    if (confirm('Вы действительно хотите очистить корзину?')) {
-      this.cartService.clearCart();
-      this.updateGrid();
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { msg: 'Вы действительно хотите очистить корзину?' }});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.cartService.clearCart();
+        this.updateGrid();
+      }
+    });
   }
 
   onQuantityChange(value: OnQuantityChangeEvent) {
@@ -54,10 +59,13 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   delItem(index: number): void {
-    if (confirm('Удалить товар из корзины?')) {
-      this.cartService.delCartItem(index);
-      this.updateGrid();
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { msg: 'Удалить товар из корзины?' }});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.cartService.delCartItem(index);
+        this.updateGrid();
+      }
+    });
   }
 
   cartIsEmpty(): boolean {
