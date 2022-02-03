@@ -2,10 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
-export interface ConfirmData {
-  msg: string;
-}
-
 @Component({
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
@@ -13,7 +9,7 @@ export interface ConfirmData {
 })
 export class ConfirmDialogComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ConfirmData) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: string) { }
 
   ngOnInit(): void {
   }

@@ -39,7 +39,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   clearCart(): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { msg: 'Вы действительно хотите очистить корзину?' } });
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: 'Вы действительно хотите очистить корзину?' });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.cartService.clearCart();
@@ -59,7 +59,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   delItem(index: number): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: { msg: 'Удалить товар из корзины?' } });
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, { data: 'Удалить товар из корзины?' } );
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.cartService.delCartItem(index);
